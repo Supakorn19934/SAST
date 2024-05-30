@@ -2,7 +2,7 @@ from PIL import Image
 import os,sys
 
 def convert_png_to_jpeg(input_folder, output_folder):
-    # Ensure the output folder exists
+    # Ensure the output folder exist
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
