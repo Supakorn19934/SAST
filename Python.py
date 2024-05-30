@@ -4,7 +4,7 @@ def get_user_data(user_id):
     connection = sqlite3.connect('example.db')
     cursor = connection.cursor()
     
-    # ช่องโหว่ SQL Injection
+    # ช่องโหว่ SQL Injections
     query = f"SELECT * FROM users WHERE id = {user_id}"
     cursor.execute(query)
     
