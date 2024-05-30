@@ -63,11 +63,12 @@ if __name__ == "__main__":
 
     base_dir = os.path.abspath(os.getcwd())
 
-    # Validate input folder and output folder
+    # Validate input folder
     if not is_safe_path(base_dir, input_folder):
         print("Error: The input folder path is not safe.")
         sys.exit(1)
-
+    
+    # Validate output folder
     if not is_safe_path(base_dir, output_folder):
         print("Error: The output folder path is not safe.")
         sys.exit(1)
