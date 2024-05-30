@@ -50,6 +50,12 @@ def validate_and_create_folder(folder_path, base_dir):
         sys.exit(1)
 
 def convert_png_to_jpeg(input_folder, output_folder):
+    # Ensure input folder is safe and exists
+    validate_and_create_folder(input_folder, base_dir)
+
+    # Ensure output folder is safe and exists
+    validate_and_create_folder(output_folder, base_dir)
+
     # Loop through each file in the input folder
     for filename in os.listdir(input_folder):
         if filename.endswith(".png"):
@@ -72,7 +78,7 @@ if __name__ == "__main__":
 
     base_dir = os.path.abspath(os.getcwd())
 
-    # Validate input and output folder paths
+    # Validate input and output folder paths before using them
     validate_and_create_folder(input_folder, base_dir)
     validate_and_create_folder(output_folder, base_dir)
 
