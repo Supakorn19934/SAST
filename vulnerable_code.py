@@ -1,32 +1,28 @@
-import sqlite3
+from PIL import Image
+import os,sys
 
-def create_connection():
-    conn = sqlite3.connect(':memory:')
-    return conn
+def convert_png_to_jpeg(input_folder, output_folder):
+    # Ensure the output folder exists
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
-def create_table(conn):
-    sql_create_table = """ CREATE TABLE users (
-                                id integer PRIMARY KEY,
-                                username text NOT NULL,
-                                password text NOT NULL
-                            ); """
-    conn.execute(sql_create_table)
-    conn.commit()
+    # Loop through each file in the input folder
+    for filename in os.listdir(input_folder):
+        if filename.endswith(".png"):
+            # Build the file paths
+            input_path = os.path.join(input_folder, filename)
+            output_path = os.path.join(output_folder, os.path.splitext(filename)[0] + ".jpeg")
+            print("input_path:"+input_path+" output_path:"+output_path)
+            # Open the PNG image
+            with Image.open(input_path) as img:
+                # Convert and save as JPEG with the best quality
+                img.convert("RGB").save(output_path, "JPEG", quality=95)
 
-def add_user(conn, username, password):
-    sql_insert_user = f"INSERT INTO users (username, password) VALUES ('{username}', '{password}')"
-    conn.execute(sql_insert_user)
-    conn.commit()
+if __name__ == "__main__":
+    # Replace 'input_folder' and 'output_folder' with your actual folder paths
+    print("Input folder:"+sys.argv[1])
+    print("Output folder:"+sys.argv[2])
+    input_folder = sys.argv[1]
+    output_folder = sys.argv[2]
 
-def main():
-    conn = create_connection()
-    create_table(conn)
-    
-    username = input("Enter username: ")
-    password = input("Enter password: ")
-    
-    add_user(conn, username, password)
-    print("User added successfully")
-
-if __name__ == '__main__':
-    main()
+    convert_png_to_jpeg(input_folder, output_folder)
