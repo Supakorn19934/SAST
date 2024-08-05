@@ -1,6 +1,7 @@
 from flask import Flask, request, escape
 
 app = Flask(__name__)
+Talisman(app)
 
 @app.route('/')
 def home():
