@@ -1,7 +1,7 @@
 from flask import Flask, request, escape
 
 app = Flask(__name__)
-Talisman(app)
+Talisman(app, force_https=True)
 
 @app.route('/')
 def home():
